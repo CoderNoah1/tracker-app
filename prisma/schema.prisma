@@ -16,6 +16,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   tags          Tag[]
+  tracks        Track[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
@@ -85,6 +86,21 @@ model Tag {
   content      String   
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
+  tracks       Track[]  @relation("TrackUserTags")
 
   @@unique([userId, content])
+}
+
+model Track {
+  id            String   @id @default(cuid())
+  name          String
+  type          String
+  tags          Tag[]    @relation("TrackUserTags")
+  description   String
+  color         String
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+
+  @@unique([userId, name])
 }

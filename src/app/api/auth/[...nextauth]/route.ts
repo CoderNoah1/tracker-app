@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { Session } from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -35,3 +35,6 @@ export const authOptions = {
         }
     }
 }
+
+export const GET = NextAuth(authOptions);
+export const POST = NextAuth(authOptions);

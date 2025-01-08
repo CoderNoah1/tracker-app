@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import QueryProvider from "@/components/QueryProvider";
 import SessionProvider from "@/components/SessionProvider";
+import { TrackFormProvider } from "./contexts/TrackContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,7 +36,9 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SessionProvider session={session}>
           <QueryProvider>
-            {children}
+            <TrackFormProvider>
+              {children}
+            </TrackFormProvider>
           </QueryProvider>
         </SessionProvider>
       </body>
